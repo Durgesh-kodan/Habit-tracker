@@ -5,7 +5,8 @@ export const getHabits = async (req, res) => {
   try {
     const { includeArchived } = req.query;
     const filter = { userId: req.user._id };
-    if (includeArchived !== true) filter.isArchived = false;
+    if (includeArchived !== true && includeArchived !== "true")
+      filter.isArchived = false;
     const habits = await Habit.find(filter).sort({ order: 1, createdAt: 1 });
     res.json(habits);
   } catch (err) {
@@ -15,16 +16,23 @@ export const getHabits = async (req, res) => {
 
 export const createHabit = async (req, res) => {
   try {
-    const { name, desciption, category, frequency, targetDays, color, icon } =
-      req.body;
+    const {
+      name,
+      description,
+      category,
+      frequency,
+      targetDays,
+      color,
+      icon,
+    } = req.body;
     if (!name) {
-      res.status(400).json({ message: "Habit name is required" });
+      return res.status(400).json({ message: "Habit name is required" });
     }
     const count = await Habit.countDocuments({ userId: req.user._id });
     const habit = await Habit.create({
       userId: req.user._id,
       name,
-      desciption,
+      description,
       category,
       frequency,
       targetDays,
@@ -44,7 +52,8 @@ export const updateHabit = async (req, res) => {
       _id: req.params.id,
       userId: req.user._id,
     });
-    if (!habit) res.status(404).json({ message: "Habit not found" });
+    if (!habit)
+      return res.status(404).json({ message: "Habit not found" });
     const fields = [
       "name",
       "description",
@@ -71,7 +80,8 @@ export const deleteHabit = async (req, res) => {
       _id: req.params.id,
       userId: req.user._id,
     });
-    if (!habit) res.status(404).json({ message: "Habit not found" });
+    if (!habit)
+      return res.status(404).json({ message: "Habit not found" });
     await HabitLog.deleteMany({ habitId: habit._id, userId: req.user._id });
     res.json({ message: "Habit deleted successfully" });
   } catch (err) {
@@ -85,7 +95,8 @@ export const archiveHabit = async (req, res) => {
       _id: req.params.id,
       userId: req.user._id,
     });
-    if (!habit) res.status(404).json({ message: "Habit not found" });
+    if (!habit)
+      return res.status(404).json({ message: "Habit not found" });
     habit.isArchived = !habit.isArchived;
     await habit.save();
     res.json(habit);

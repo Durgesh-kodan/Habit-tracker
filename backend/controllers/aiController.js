@@ -203,11 +203,11 @@ export const chatAnalysis = async (req, res) => {
 export const morningMotivation = async (req, res) => {
   try {
     const habits = await Habit.find({
-      userId: req.user_id,
+      userId: req.user._id,
       isArchived: false,
     });
-    if (!habit.length) {
-      res.json({
+    if (!habits.length) {
+      return res.json({
         content:
           "Good morning! Add your first habit and let's get the momentum started ",
       });
@@ -234,7 +234,7 @@ export const morningMotivation = async (req, res) => {
     const today = todayKey();
     const todayLogs = logs.filter((l) => l.completedDate === today);
     const done = todayLogs.length;
-    const total = habits.lengrh;
+    const total = habits.length;
 
     const userMsg = `Today's habits and streaks:\n${ctx}\n\nDone today: ${done}/${total}. Write the morning message now.`;
 

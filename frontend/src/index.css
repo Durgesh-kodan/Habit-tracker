@@ -223,6 +223,41 @@ body::before {
     color: var(--chip-text);
   }
 
+  .dropdown-solid {
+    background: var(--surface-strong);
+    border: 1px solid var(--surface-border);
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Custom dropdown portal (rendered to body) - dark mode */
+  html.dark body > .dropdown-solid,
+  html.dark .dropdown-solid {
+    background: var(--bg-base) !important;
+    border-color: var(--surface-border) !important;
+  }
+
+  /* Dropdown menu items in dark mode */
+  html.dark .dropdown-solid button {
+    color: var(--text) !important;
+  }
+  html.dark .dropdown-solid button:hover {
+    background: var(--surface-hover) !important;
+  }
+
+  /* Native <option> elements — force dark theme in dark mode */
+  html.dark select option {
+    background: var(--surface-strong) !important;
+    color: var(--text) !important;
+  }
+
+  /* Fix native select element (not the dropdown panel) in dark mode */
+  html.dark select.input {
+    background: var(--bg-base) !important;
+    border-color: var(--input-border) !important;
+    color: var(--text) !important;
+  }
+
   .divider {
     border-color: var(--divider) !important;
   }

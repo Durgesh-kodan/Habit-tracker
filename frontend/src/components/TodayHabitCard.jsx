@@ -94,11 +94,11 @@ export default function TodayHabitCard({
                 onClick={() => setMenu(false)}
               />
               <div
-                className="fixed z-[110] glass-strong rounded-xl py-1 w-40 shadow-xl animate-fade-in"
+                className="fixed z-[110] dropdown-solid rounded-xl py-1 w-40 shadow-xl animate-fade-in"
                 style={{ top: pos.top, left: pos.left }}
               >
                 <button
-                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-soft hover:bg-[var(--surface-hover)]"
+                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-[var(--text)] hover:bg-[var(--surface-hover)]"
                   onClick={() => {
                     setMenu(false);
                     onEdit();
@@ -107,7 +107,7 @@ export default function TodayHabitCard({
                   <Pencil size={14} /> Edit
                 </button>
                 <button
-                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-soft hover:bg-[var(--surface-hover)]"
+                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-[var(--text)] hover:bg-[var(--surface-hover)]"
                   onClick={() => {
                     setMenu(false);
                     onArchive();
@@ -117,7 +117,7 @@ export default function TodayHabitCard({
                   {habit.isArchived ? "Unarchive" : "Archive"}
                 </button>
                 <button
-                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-rose-500 hover:bg-rose-500/10"
+                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-rose-400 hover:bg-rose-500/10"
                   onClick={() => {
                     setMenu(false);
                     onDelete();
